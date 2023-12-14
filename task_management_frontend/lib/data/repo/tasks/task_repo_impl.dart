@@ -1,0 +1,57 @@
+import 'package:task_management_frontend/data/models/api_response.dart';
+
+import '../../../app/config/server_config.dart';
+import '../../../utils/exceptions/exceptions.dart';
+import '../../models/task_model.dart';
+import '../../service/service.dart';
+import 'task_repo.dart';
+
+class TaskRepoImpl implements TaskRepo {
+  @override
+  Future<List<TaskModel>> getAllTasks({String? category}) async {
+    try {
+      final String url;
+
+      final response =
+          await apiService.get(path: '${baseUrl}/'); //TODO path for the route
+
+      if (response.statusCode == 200) {
+        final List<TaskModel> Tasks = (response.data as List)
+            .map((Task) => TaskModel.fromJson(Task))
+            .toList();
+
+        return Tasks;
+      }
+
+      return [];
+    } catch (e) {
+      throw RepoException("Error while fetching Tasks");
+    }
+  }
+
+  @override
+  Future<ApiResponse> createTask({
+    required String taskId,
+    required String taskName,
+    required String taskDescription,
+    required DateTime taskDate,
+    required double taskPriority,
+  }) async {
+    try {
+      final response = await apiService.post(
+        path: '$baseUrl/createTask',
+        data: {
+          'task_id': taskId,
+          'task_name': taskName,
+          'task_desc': taskDescription,
+          'task_date': taskDate.toIso8601String(),
+          'task_priority': taskPriority,
+        },
+      );
+
+      return response;
+    } catch (e) {
+      throw RepoException("Error while adding Tasks");
+    }
+  }
+}
