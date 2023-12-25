@@ -7,24 +7,34 @@ import '../../service/service.dart';
 import 'task_repo.dart';
 
 class TaskRepoImpl implements TaskRepo {
+  List<TaskModel> tasksList = [];
+
   @override
   Future<List<TaskModel>> getAllTasks({String? category}) async {
     try {
       final String url;
 
-      final response =
-          await apiService.get(path: '${baseUrl}/'); //TODO path for the route
+      final response = await apiService.get(
+          path: '${baseUrl}/getAllTasks'); //TODO path for the route
 
       if (response.statusCode == 200) {
-        final List<TaskModel> Tasks = (response.data as List)
-            .map((Task) => TaskModel.fromJson(Task))
-            .toList();
+        // final list = (response.data['data'])
+        //     .map((task) => TaskModel.fromJson(task))
+        //     .toList();
 
-        return Tasks;
+        for (var task in response.data['data']) {
+          final eachTask = TaskModel.fromJson(task);
+          tasksList.add(eachTask);
+        }
+
+        print('tasksList  ->>>>    ${tasksList}');
+
+        return tasksList;
       }
 
       return [];
     } catch (e) {
+      print('Errror  ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>    ${e}');
       throw RepoException("Error while fetching Tasks");
     }
   }

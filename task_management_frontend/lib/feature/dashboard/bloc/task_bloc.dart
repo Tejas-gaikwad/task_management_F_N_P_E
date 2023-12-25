@@ -14,11 +14,14 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   TaskBloc() : super(TasksInitialState()) {
     on<TasksFetchEvent>((event, emit) async {
-      emit(TasksLoadingState());
+      emit(TasksFetchingState());
       try {
+        print('Fetching tasks ->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
         _tasks = await taskRepo.getAllTasks();
+        print('ALL tasks are  ->>>      $_tasks');
         emit(TasksLoadedState(_tasks));
       } catch (error) {
+        print('error =>>>>>>>>>   ${error}');
         emit(TaskErrorState(message: error.toString()));
       }
     });

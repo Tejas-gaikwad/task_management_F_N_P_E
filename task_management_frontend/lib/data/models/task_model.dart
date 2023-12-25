@@ -3,7 +3,7 @@ class TaskModel {
   final String? taskName;
   final double? taskPriority;
   final String? taskDescription;
-  final String? taskStartDate;
+  final DateTime? taskStartDate;
 
   TaskModel({
     required this.id,
@@ -19,7 +19,7 @@ class TaskModel {
       taskName: json['task_name'],
       taskPriority: json['task_priority'].toDouble(),
       taskDescription: json['task_desc'],
-      taskStartDate: json['task_date'],
+      taskStartDate: DateTime.parse(json['task_date']),
     );
   }
 }

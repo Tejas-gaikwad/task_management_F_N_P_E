@@ -9,6 +9,8 @@ sealed class TaskState extends Equatable {
 
 final class TasksInitialState extends TaskState {}
 
+final class TasksFetchingState extends TaskState {}
+
 final class TasksLoadingState extends TaskState {}
 
 final class TasksLoadedState extends TaskState {
