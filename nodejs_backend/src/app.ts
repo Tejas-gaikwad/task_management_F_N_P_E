@@ -1,6 +1,6 @@
 import express from 'express';
 const pg =  require('pg');
-import createTaskRouter from './routes/create_task';
+import taskAPIRouter from './routes/tasks_router';
 import bodyParsers from 'body-parser';
 
 const app = express();
@@ -17,7 +17,9 @@ const pool = new pg.Pool({
 })
 
 // Mount the tasks route
-app.use('/api', createTaskRouter);
+app.use('/api', taskAPIRouter);
+app.use('/api', taskAPIRouter);
+
 
 // Test the connection
 pool.query('SELECT NOW()', (err:any, res:any) => {
