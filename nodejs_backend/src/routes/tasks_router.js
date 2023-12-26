@@ -10,5 +10,5 @@ const update_task_1 = require("../controllers/tasks_controllers/update_task/upda
 const router = (0, express_1.Router)();
 router.post('/createTask', createtask_1.default);
 router.get('/getAllTasks', getAllTask_1.default);
-router.get('/updateTask/:task_id', update_task_1.updateTask);
+router.put('/updateTask', update_task_1.updateTask);
 exports.default = router;

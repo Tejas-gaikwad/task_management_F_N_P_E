@@ -16,11 +16,14 @@ exports.updateTask = void 0;
 const database_1 = __importDefault(require("../../../database/database"));
 const updateTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("Updating - ->>>  ");
-        const { task_id } = req.body;
-        console.log("REsponse ->>>    " + task_id);
-        const res = yield database_1.default.query('SELECT * from Tasks WHERE task_id =$1', [task_id]);
-        console.log("REsponse ->>>    " + res.data);
+        const { task_name, task_desc, task_priority, task_date, task_status, task_id } = req.body;
+        const result = yield database_1.default.query('UPDATE tasks SET task_name = $1, task_desc = $2, task_priority = $3, task_date = $4 WHERE task_id = $6', [task_name, task_desc, task_priority, task_date, task_status, task_id]);
+        if (result == null) {
+            return res.status(404).json({ error: 'Task not updated' });
+        }
+        else {
+            return res.status(200).json({ data: result, message: 'Update success.' });
+        }
     }
     catch (error) {
         console.log("error ->>>    " + error);
