@@ -20,6 +20,7 @@ const pool = new pg.Pool({
 // Mount the tasks route
 app.use('/api', tasks_router_1.default);
 app.use('/api', tasks_router_1.default);
+app.use('/api', tasks_router_1.default);
 // Test the connection
 pool.query('SELECT NOW()', (err, res) => {
     console.log(err ? `Database connection error  -> ${err}` : 'Database connected');

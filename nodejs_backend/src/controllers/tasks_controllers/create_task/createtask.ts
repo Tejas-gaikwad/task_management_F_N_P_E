@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import Task from '../models/task';
-import db from '../database/database';
+import Task from '../../../models/task';
+import db from '../../../database/database';
 
 export const createTask = async (req:Request, res:Response) => {
     try{ 

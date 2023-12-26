@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import db from '../database/database';
+import db from '../../../database/database';
 
 
 export const getAllTasks = async (req:Request, res:Response) => {

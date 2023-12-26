@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createTask = void 0;
-const database_1 = __importDefault(require("../database/database"));
+const database_1 = __importDefault(require("../../../database/database"));
 const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { task_id, task_name, task_desc, task_priority, task_dateTime } = req.body;

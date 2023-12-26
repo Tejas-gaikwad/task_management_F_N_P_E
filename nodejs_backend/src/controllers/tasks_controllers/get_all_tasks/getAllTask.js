@@ -13,12 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllTasks = void 0;
-const database_1 = __importDefault(require("../database/database"));
+const database_1 = __importDefault(require("../../../database/database"));
 const getAllTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield database_1.default.query('SELECT * FROM tasks');
-        const tasks = response.data;
-        console.log("response  ->>>   " + response);
         res.status(200).json({ data: response });
     }
     catch (error) {

@@ -19,6 +19,7 @@ const pool = new pg.Pool({
 // Mount the tasks route
 app.use('/api', taskAPIRouter);
 app.use('/api', taskAPIRouter);
+app.use('/api', taskAPIRouter);
 
 
 // Test the connection
